@@ -16,9 +16,11 @@ apt upgrade -y
 # Install nala
 apt install nala -y
 
-apt nala install kde-plasma-desktop plasma-ma flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji dirmngr ca-certificates software-properties-common -y 
+nala install kde-plasma-desktop plasma-nm -y
 
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji dirmngr ca-certificates software-properties-common -y 
+
+nala update
 
 #apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
 #sudo adduser $USER libvirt
@@ -42,10 +44,11 @@ nala update
 sudo apt install code
 
 
-latest_yq_linux=$(curl -sL https://api.github.com/repos/TheAssassin/AppImageLauncher/releases/latest | jq -r ".assets[].browser_download_url" | grep bionic_amd64.deb)
-wget $latest_yq_linux
-
-printf $latest_yq_linux | cut -d '/' -f9
+latest_AppImgLuchr=$(curl -sL https://api.github.com/repos/TheAssassin/AppImageLauncher/releases/latest | jq -r ".assets[].browser_download_url" | grep bionic_amd64.deb)
+wget $latest_AppImgLuchr
+AppImgLuchr=$(printf $latest_AppImgLuchr | cut -d '/' -f9)
+dpkg -i  $AppImgLuchr
+rm $AppImgLuchr
 
 latest_nextcloud=$(curl -sL https://api.github.com/repos/nextcloud-releases/desktop/releases/latest | jq -r ".assets[].browser_download_url" | grep x86_64.AppImage)
 #printf $latest_nextcloud 
@@ -59,11 +62,11 @@ latest_picocrypt=$(curl -sL https://api.github.com/repos/HACKERALERT/Picocrypt/r
 printf $latest_picocrypt | cut -d '/' -f9
 
 
-
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 
 git clone https://github.com/kelebek333/mousewheel.git
-cd mousewheel
+cd mousewheel 
 chmod +x mousewheel.sh
 ./mousewheel.sh
 cd $builddir
