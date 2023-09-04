@@ -51,15 +51,21 @@ dpkg -i  $AppImgLuchr
 rm $AppImgLuchr
 
 latest_nextcloud=$(curl -sL https://api.github.com/repos/nextcloud-releases/desktop/releases/latest | jq -r ".assets[].browser_download_url" | grep x86_64.AppImage)
-#printf $latest_nextcloud 
-printf $latest_nextcloud | cut -d '/' -f9
+wget $latest_nextcloud
+nextcloud=$(printf $latest_nextcloud | cut -d '/' -f9)
+chmod +x $nextcloud
 
 
 latest_github_dsktp=$(curl -sL https://api.github.com/repos/shiftkey/desktop/releases/latest | jq -r ".assets[].browser_download_url"  | grep '\<x86_64.*linux1.AppImage\>' )
-printf $latest_github_dsktp | cut -d '/' -f9
+wget $latest_github_dsktp
+github_dsktp=$(printf $latest_github_dsktp | cut -d '/' -f9)
+chmod +x $github_dsktp
 
 latest_picocrypt=$(curl -sL https://api.github.com/repos/HACKERALERT/Picocrypt/releases/latest | jq -r ".assets[].browser_download_url"  | grep Picocrypt.AppImage )
-printf $latest_picocrypt | cut -d '/' -f9
+wget $latest_picocrypt
+picocrypt=$(printf $latest_picocrypt | cut -d '/' -f9)
+chmod +x $picocrypt
+./ $picocrypt
 
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -72,3 +78,4 @@ chmod +x mousewheel.sh
 cd $builddir
 
 
+tailscale up
