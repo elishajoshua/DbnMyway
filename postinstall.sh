@@ -19,9 +19,11 @@ apt install nala -y
 nala install kde-plasma-desktop plasma-nm -y
 
 nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji -y
-nald install pcscd git dirmngr ca-certificates software-properties-common ark kwrite python3 -y
+nald install pcscd git dirmngr ca-certificates software-properties-common ark kwrite kcalc okular python3 -y
 
 nala update
+
+apt remove konqueror -y
 
 #apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
 #sudo adduser $USER libvirt
@@ -52,10 +54,14 @@ flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 flatpak install flathub com.spotify.Client -y
 flatpak install flathub com.yubico.yubioath -y
 flatpak install flathub org.gabmus.whatip -y
+flatpak install flathub com.github.Murmele.Gittyup -y
+flatpak install flathub com.github.Murmele.Gittyup -y
 
 wget  https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb
 dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 
+nala update 
+nala upgrade -y
 
 
 git clone https://github.com/kelebek333/mousewheel.git
