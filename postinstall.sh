@@ -60,8 +60,14 @@ flatpak install flathub com.github.Murmele.Gittyup -y
 wget  https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb
 dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 
+apt --fix-borken install
+
+nala install ark -y
+
 nala update 
 nala upgrade -y
+
+nala autoremove -y
 
 
 git clone https://github.com/kelebek333/mousewheel.git
