@@ -9,7 +9,6 @@ fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-
 # Update packages list and update system
 apt update
 apt upgrade -y
@@ -26,9 +25,9 @@ nala install pcscd git dirmngr ca-certificates software-properties-common python
 
 nala update
 
-apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
-sudo adduser $USER libvirt
-sudo adduser $USER libvirt-qemu
+#apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager -y
+#sudo adduser $USER libvirt
+#sudo adduser $USER libvirt-qemu
 
 # Install brave-browser
 wget https://dl.thorium.rocks/debian/dists/stable/thorium.list
@@ -42,8 +41,6 @@ curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | s
 echo deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main | sudo tee /etc/apt/sources.list.d/vscode.list
 nala update
 sudo nala install code -y
-
-
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
