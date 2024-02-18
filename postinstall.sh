@@ -9,6 +9,27 @@ fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+debian_name=bookworm
+sources_file=/etc/apt/sources.list
+
+mv $sources_file $sources_file.bkp
+
+touch $sources_file
+
+ cat<< EOF > $sources_file
+ deb http://ftp.MIRROR.debian.org/debian/ $debian_name main contrib non-free
+ deb-src http://ftp.MIRROR.debian.org/debian/ $debian_name main contrib non-free
+
+ deb http://security.debian.org/ $debian_name/updates main contrib non-free
+ deb-src http://security.debian.org/ $debian_name/updates main contrib non-free
+
+ deb http://ftp.MIRROR.debian.org/debian/ $debian_name-updates main contrib non-free
+ deb-src http://ftp.MIRROR.debian.org/debian/ $debian_name-updates main contrib non-free
+
+ EOF
+
+ chomd 644  $sources_file
+
 # Update packages list and update system
 apt update
 apt upgrade -y
@@ -16,10 +37,12 @@ apt upgrade -y
 # Install nala
 apt install nala -y
 
-nala install kde-plasma-desktop plasma-nm -y
+nala install firmware-linux firmware-linux-free firmware-linux-nonfree firmware-iwlwifi -y
+
+nala install gnome-core gdm3 -y
 
 nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji -y
-nald install pcscd git dirmngr ca-certificates software-properties-common ark kwrite kcalc okular python3 -y
+nald install pcscd git dirmngr ca-certificates software-properties-common python3 -y
 
 nala update
 
@@ -53,16 +76,14 @@ flatpak install flathub md.obsidian.Obsidian -y
 flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 flatpak install flathub com.spotify.Client -y
 flatpak install flathub com.yubico.yubioath -y
-flatpak install flathub org.gabmus.whatip -y
-flatpak install flathub com.github.Murmele.Gittyup -y
-flatpak install flathub com.github.Murmele.Gittyup -y
+
 
 wget  https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb
 dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 
 apt --fix-borken install
 
-nala install ark -y
+nala install ark kcalc -y
 
 nala update 
 nala upgrade -y
