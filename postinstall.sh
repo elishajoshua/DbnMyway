@@ -22,18 +22,13 @@ nala install firmware-linux firmware-linux-free firmware-linux-nonfree firmware-
 nala install gnome-core gdm3 -y
 
 nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji -y
-nald install pcscd git dirmngr ca-certificates software-properties-common python3 -y
+nala install pcscd git dirmngr ca-certificates software-properties-common python3 -y
 
 nala update
 
-apt remove konqueror -y
-
-#apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
-#sudo adduser $USER libvirt
-#sudo adduser $USER libvirt-qemu
-
-curl -fsSL https://tailscale.com/install.sh | sh
-
+apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
+sudo adduser $USER libvirt
+sudo adduser $USER libvirt-qemu
 
 # Install brave-browser
 wget https://dl.thorium.rocks/debian/dists/stable/thorium.list
@@ -56,14 +51,17 @@ flatpak install flathub md.obsidian.Obsidian -y
 flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 flatpak install flathub com.spotify.Client -y
 flatpak install flathub com.yubico.yubioath -y
+flatpak install flathub org.keepassxc.KeePassXC -y
 
 
 wget  https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-Debian-12-amd64.deb
 dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 
-apt --fix-borken install
+latest_angry_ip=$(curl -sL https://api.github.com/repos/angryip/ipscan/releases/latest | jq -r ".assets[].browser_download_url" | grep amd64.deb)
+wget $latest_angry_ip
+dpkg -i  ${latest_ap_linux##*/}
 
-nala install ark kcalc -y
+apt --fix-borken install
 
 nala update 
 nala upgrade -y
@@ -77,5 +75,6 @@ chmod +x mousewheel.sh
 ./mousewheel.sh
 cd $builddir
 
+curl -fsSL https://tailscale.com/install.sh | sh
 
 tailscale up
