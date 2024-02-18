@@ -9,25 +9,6 @@ fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-debian_name=bookworm
-sources_file=/etc/apt/sources.list
-
-mv $sources_file $sources_file.bkp
-
-touch $sources_file
-
- cat<< EOF > $sources_file
- deb http://mirrors.namecheap.com/debian/ bookworm main contrib non-free
- deb-src http://mirrors.namecheap.com/debian/ bookworm main contrib non-free
-
- deb http://security.debian.org/ bookworm/updates main contrib non-free
- deb-src http://security.debian.org/ bookworm/updates main contrib non-free
-
- deb http://mirrors.namecheap.com/debian/ bookworm-updates main contrib non-free
- deb-src http://mirrors.namecheap.com/debian/ bookworm-updates main contrib non-free
-EOF
-
- chmod 644  $sources_file
 
 # Update packages list and update system
 apt update
