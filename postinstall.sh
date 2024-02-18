@@ -17,18 +17,17 @@ mv $sources_file $sources_file.bkp
 touch $sources_file
 
  cat<< EOF > $sources_file
- deb http://ftp.MIRROR.debian.org/debian/ $debian_name main contrib non-free
- deb-src http://ftp.MIRROR.debian.org/debian/ $debian_name main contrib non-free
+ deb http://mirrors.namecheap.com/debian/ bookworm main contrib non-free
+ deb-src http://mirrors.namecheap.com/debian/ bookworm main contrib non-free
 
- deb http://security.debian.org/ $debian_name/updates main contrib non-free
- deb-src http://security.debian.org/ $debian_name/updates main contrib non-free
+ deb http://security.debian.org/ bookworm/updates main contrib non-free
+ deb-src http://security.debian.org/ bookworm/updates main contrib non-free
 
- deb http://ftp.MIRROR.debian.org/debian/ $debian_name-updates main contrib non-free
- deb-src http://ftp.MIRROR.debian.org/debian/ $debian_name-updates main contrib non-free
+ deb http://mirrors.namecheap.com/debian/ bookworm-updates main contrib non-free
+ deb-src http://mirrors.namecheap.com/debian/ bookworm-updates main contrib non-free
+EOF
 
- EOF
-
- chomd 644  $sources_file
+ chmod 644  $sources_file
 
 # Update packages list and update system
 apt update
