@@ -69,6 +69,9 @@ nala upgrade -y
 
 nala autoremove -y
 
+mv /etc/network/interfaces /etc/network/interfaces.old
+
+cp interfaces /etc/network/interfaces
 
 git clone https://github.com/kelebek333/mousewheel.git
 cd mousewheel 
