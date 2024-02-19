@@ -9,6 +9,7 @@ fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+
 # Update packages list and update system
 apt update
 apt upgrade -y
@@ -25,22 +26,17 @@ nala install pcscd git dirmngr ca-certificates software-properties-common python
 
 nala update
 
-#apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager -y
-#sudo adduser $USER libvirt
-#sudo adduser $USER libvirt-qemu
-
-# Install brave-browser
-wget https://dl.thorium.rocks/debian/dists/stable/thorium.list
-sudo mv thorium.list /etc/apt/sources.list.d/
-sudo apt update
-sudo apt install thorium-browser -y
+apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
+sudo adduser $USER libvirt
+sudo adduser $USER libvirt-qemu
 
 # install vscode
-#nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/vscode.gpg >/dev/null
 echo deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main | sudo tee /etc/apt/sources.list.d/vscode.list
 nala update
 sudo nala install code -y
+
+
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -57,6 +53,14 @@ dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 latest_angry_ip=$(curl -sL https://api.github.com/repos/angryip/ipscan/releases/latest | jq -r ".assets[].browser_download_url" | grep amd64.deb)
 wget $latest_angry_ip
 dpkg -i  ${latest_ap_linux##*/}
+
+latest_thorium=$(curl -sL https://api.github.com/repos/Alex313031/thorium/releases/latest | jq -r ".assets[].browser_download_url" | grep amd64.deb)
+wget $latest_thorium
+dpkg -i  ${latest_thorium##*/}
+
+gdtp=$(curl -sL https://api.github.com/repos/shiftkey/desktop/releases/latest | jq -r ".tag_name")
+wget https://github.com/shiftkey/desktop/releases/download/$gdtp/GitHubDesktop-linux-amd64-${gdtp:8:-7}-linux2.deb
+dpkg -i  GitHubDesktop-linux-amd64-${gdtp:8:-7}-linux2.deb
 
 apt --fix-borken install
 
