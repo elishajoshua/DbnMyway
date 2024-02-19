@@ -26,7 +26,7 @@ nala install pcscd git dirmngr ca-certificates software-properties-common python
 
 nala update
 
-apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager -y
+nala install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager -y
 sudo adduser $USER libvirt
 sudo adduser $USER libvirt-qemu
 
