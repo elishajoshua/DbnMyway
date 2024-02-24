@@ -27,7 +27,7 @@ nala install gnome-core gdm3 gnome-tweaks -y
 echo "Gnome Install Complete"
 sleep 10
 
-nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget  python3 jq pulseaudio pavucontrol neofetch flameshot psmisc pcscd git dirmngr ca-certificates software-properties-common -y
+nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget python3 jq pulseaudio pavucontrol neofetch flameshot psmisc pcscd git dirmngr ca-certificates software-properties-common -y
 
 echo "Essential software Install Complete"
 sleep 10
