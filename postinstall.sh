@@ -19,10 +19,16 @@ apt install nala -y
 
 nala install firmware-linux firmware-linux-free firmware-linux-nonfree firmware-iwlwifi -y
 
-nala install gnome-core gdm3 -y
+echo "Firmware Install complete"
+sleep 10
 
-nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc papirus-icon-theme fonts-noto-color-emoji -y
-nala install pcscd git dirmngr ca-certificates software-properties-common python3 -y
+nala install gnome-core gdm3 gnome-tweaks -y
+
+echo "Gnome Install Complete"
+sleep 10
+
+nala install gnupg2 flatpak yad imwheel apt-transport-https curl unzip wget pulseaudio pavucontrol neofetch flameshot psmisc -y
+nala install pcscd git dirmngr ca-certificates software-properties-common python3 jq -y
 
 nala update
 
@@ -52,11 +58,13 @@ dpkg -i veracrypt-1.26.7-Debian-12-amd64.deb
 
 latest_angry_ip=$(curl -sL https://api.github.com/repos/angryip/ipscan/releases/latest | jq -r ".assets[].browser_download_url" | grep amd64.deb)
 wget $latest_angry_ip
-dpkg -i  ${latest_ap_linux##*/}
+sudo dpkg -i  ${latest_angry_ip##*/}
 
-latest_thorium=$(curl -sL https://api.github.com/repos/Alex313031/thorium/releases/latest | jq -r ".assets[].browser_download_url" | grep amd64.deb)
-wget $latest_thorium
-dpkg -i  ${latest_thorium##*/}
+--sudo rm -fv /etc/apt/sources.list.d/thorium.list && \
+sudo wget --no-hsts -P /etc/apt/sources.list.d/ \
+http://dl.thorium.rocks/debian/dists/stable/thorium.list && \
+sudo apt update
+sudo apt install thorium-browser
 
 gdtp=$(curl -sL https://api.github.com/repos/shiftkey/desktop/releases/latest | jq -r ".tag_name")
 wget https://github.com/shiftkey/desktop/releases/download/$gdtp/GitHubDesktop-linux-amd64-${gdtp:8:-7}-linux2.deb
